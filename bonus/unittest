@@ -1,0 +1,41 @@
+#!/usr/bin/python3
+import unittest
+import subprocess
+
+class Test(unittest.TestCase):
+    def test_h (self):
+        res = subprocess.run(["./../107transfer","-h"], capture_output=True)
+        self.assertEqual(res.stdout.decode() , "USAGE\n    ./107transfer [num den]*\nDESCRIPTION\n    num    polynomial numerator defined by its coefficients\n    den    polynomial denominator defined by its coefficients\n")
+        self.assertAlmostEqual(res.returncode, 0)
+
+    def test_wrong_number_args_h (self):
+        res = subprocess.run(["./../107transfer","-h", "3"], capture_output=True)
+        self.assertAlmostEqual(res.returncode, 84)
+
+    def test_mathematical_rigor(self):
+        res = subprocess.run(["./../107transfer","2", "0"], capture_output=True)
+        self.assertAlmostEqual(res.returncode, 84)
+
+    def test_no_args(self):
+        res = subprocess.run(["./../107transfer"], capture_output=True)
+        self.assertAlmostEqual(res.returncode, 84)
+
+    def test_number_of_args(self):
+        res = subprocess.run(["./../107transfer", "1", "2", "3"], capture_output=True)
+        self.assertAlmostEqual(res.returncode, 84)
+
+    def test_wrong_type_args(self):
+        res = subprocess.run(["./../107transfer", "1", "b"], capture_output=True)
+        self.assertAlmostEqual(res.returncode, 84)
+
+    def test_good_args(self):
+        res = subprocess.run(["./../107transfer", "1", "2"], capture_output=True)
+        self.assertAlmostEqual(res.returncode, 0)
+
+    def test_multiple_args(self):
+        res_1 = subprocess.run(["./../107transfer", "1", "2"], capture_output=True)
+        res_2 = subprocess.run(["./../107transfer", "1", "2", "3", "4"], capture_output=True)
+        self.assertNotEqual(res_1.stdout.decode(), res_2.stdout.decode()) 
+        self.assertAlmostEqual(res_2.returncode, 0)
+
+if __name__ == "__main__": unittest.main()

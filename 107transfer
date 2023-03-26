@@ -1,0 +1,88 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import sys
+
+
+def __h():
+    print("USAGE")
+    print("    ./107transfer [num den]*")
+    print("DESCRIPTION")
+    print("    num    polynomial numerator defined by its coefficients")
+    print("    den    polynomial denominator defined by its coefficients")
+    exit(0)
+
+#the - h case ans the impair case (error case)
+
+
+def error_case(all_sys_argv):
+    str_h = "".join([" - ".replace(" ", ""),"h"])
+    if (len(all_sys_argv) == 2 and all_sys_argv[1] == str_h):
+        __h()
+    if ((len(all_sys_argv) - 1) % 2 != 0 or (len(all_sys_argv)) < 2):
+        print("nb args")
+        exit(84)
+
+#split on arg with ' * ' and put all elements into a list:
+#arg_1 = "1 * 2 * 3 " ==> [1,2,3]
+#arg_2 = "1" ==> [1]
+
+
+def arg_recup(sys_argv, pos_argv):
+    list_args = []
+    stock = sys_argv.split(' * '.replace(" ", ""))
+
+    try:
+        i = 0
+        for i in range (0, len(stock)):
+            list_args.append(float(stock[i]))
+    except ValueError:
+        print("type of args")
+        exit(84)
+    return list_args
+
+#stock pair of args two by two into a big list of pair of args:
+#all_args = [[[1,2,3], [1]],...]
+
+
+def stock_all_args(all_argv):
+    list_all_args = []
+    list_tmp = []
+
+    for j in range (1, len(all_argv)):
+        if (j % 2 != 0):
+            list_tmp = arg_recup(all_argv[j], j)
+        else:
+            list_all_args.append([list_tmp, arg_recup(all_argv[j], j)])
+
+    return list_all_args
+
+
+def main():
+    #error case and - h
+    error_case(sys.argv)
+    #big list to stock all pair of args
+    list_all_args = stock_all_args(sys.argv)
+    x = 0
+
+    #main loop while each value of x hasn't been reach 0 --> 1.000
+    #bug here
+    while (x < 1.001):
+        count = res = 1
+        #take the args one by one and make the calcul for each pair: 
+        # (1 * x**0 + 2 * x**1 + 3 * x**2) / (1 * x**0),...
+        # and display the result for each value of x: 0.000->0.001->...->1.000
+        while (count < (len(sys.argv) - 1)):
+            n = list_all_args[count//2][0]
+            d = list_all_args[count//2][1]
+            n_tot = sum(n[i] * x ** i for i in range(0, len(n)))
+            d_tot = sum(d[i] * x ** i for i in range(0, len(d)))
+            if (d_tot == 0):
+                print("div by zero is impossible")
+                exit(84)
+            res *= (n_tot / d_tot)
+            count += 2
+        print("%.3f -> %.5f" % (x, res))
+        x += 1 * 10**-3
+if __name__ == "__main__":
+    main()
