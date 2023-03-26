@@ -3,9 +3,9 @@ an Epitech project
 
 ## Installation
 run this code to clone the current repository:
-'''bash
-git clone 
-'''
+```bash
+git clone git@github.com:amdjadouxx/107transfer.git
+```
 
 ## Usage
 
