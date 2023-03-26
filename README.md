@@ -8,7 +8,7 @@ don't forget to use the "chmod" command to allow the executable to run on your d
 ## Installation
 run this code to clone the current repository:
 ```bash
-git clone git@github.com:amdjadouxx/107transfer.git
+git clone https://github.com/amdjadouxx/107transfer.git
 ```
 
 ## Usage
