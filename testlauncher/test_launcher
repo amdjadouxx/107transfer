@@ -91,7 +91,7 @@ def launch_test():
         print("all good bro")
 
 if __name__ == "__main__":
-    if (len(sys.argv) == 2 and sys.argv[1] == "-h"):
+    if (len(sys.argv) == 2 and sys.argv[1] == "-h" and len(sys.argv) == 2):
         print("Write this on the console to configure the attributes of the output: ./test_launcher -p.")
         print("By default all the param will be enable.")
         exit(0)
