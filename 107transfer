@@ -6,7 +6,7 @@ import sys
 
 def __h():
     print("USAGE")
-    print("    ./107transfer [num den]+")
+    print("    ./107transfer [num den]+\n")
     print("DESCRIPTION")
     print("    num    polynomial numerator defined by its coefficients")
     print("    den    polynomial denominator defined by its coefficients")

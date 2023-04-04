@@ -23,11 +23,11 @@ def compare_output(text, file):
 
 def launch_test():
     error = 0
-
+    
     #error 01
     res = subprocess.run(["./../107transfer", "-h"], capture_output=True)
     output_printt(res.stdout.decode())
-    if (res.stdout.decode() != "USAGE\n    ./107transfer [num den]+\nDESCRIPTION\n    num    polynomial numerator defined by its coefficients\n    den    polynomial denominator defined by its coefficients\n"):
+    if (res.stdout.decode() != "USAGE\n    ./107transfer [num den]+\n\nDESCRIPTION\n    num    polynomial numerator defined by its coefficients\n    den    polynomial denominator defined by its coefficients\n"):
         print("to correct: your -help is not correct (error01)")
         error += 1
         quit_or_not()

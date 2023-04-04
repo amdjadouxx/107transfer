@@ -5,7 +5,7 @@ import subprocess
 class Test(unittest.TestCase):
     def test_h (self):
         res = subprocess.run(["./../107transfer","-h"], capture_output=True)
-        self.assertEqual(res.stdout.decode() , "USAGE\n    ./107transfer [num den]*\nDESCRIPTION\n    num    polynomial numerator defined by its coefficients\n    den    polynomial denominator defined by its coefficients\n")
+        self.assertEqual(res.stdout.decode() , "USAGE\n    ./107transfer [num den]+\n\nDESCRIPTION\n    num    polynomial numerator defined by its coefficients\n    den    polynomial denominator defined by its coefficients\n")
         self.assertAlmostEqual(res.returncode, 0)
 
     def test_wrong_number_args_h (self):
